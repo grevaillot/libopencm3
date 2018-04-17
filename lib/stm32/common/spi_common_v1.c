@@ -21,7 +21,7 @@ Example: Clk/4, positive clock polarity, leading edge trigger, 8-bit words,
 LSB first.
 @code
 	spi_init_master(SPI1, SPI_CR1_BAUDRATE_FPCLK_DIV_4, SPI_CR1_CPOL_CLK_TO_0_WHEN_IDLE,
-			SPI_CR1_CPHA_CLK_TRANSITION_1, SPI_CR1_DFF_8BIT, SPI_CR1_LSBFIRST);
+			SPI_CR1_CPHA_CLK_TRANSITION_1, SPI_CR1_LSBFIRST);
 	spi_write(SPI1, 0x55);		// 8-bit write
 	spi_write(SPI1, 0xaa88);	// 16-bit write
 	reg8 = spi_read(SPI1);		// 8-bit read
@@ -56,50 +56,6 @@ LSB first.
 
 
 /**@{*/
-
-/*---------------------------------------------------------------------------*/
-/** @brief Configure the SPI as Master.
-
-The SPI peripheral is configured as a master with communication parameters
-baudrate, data format 8/16 bits, frame format lsb/msb first, clock polarity
-and phase. The SPI enable, CRC enable and CRC next controls are not affected.
-These must be controlled separately.
-
-To support multiple masters (dynamic switching between master and slave)
-you must set SSOE to 0 and select either software or hardware control of
-the NSS pin.
-
-@param[in] spi Unsigned int32. SPI peripheral identifier @ref spi_reg_base.
-@param[in] br Unsigned int32. Baudrate @ref spi_baudrate.
-@param[in] cpol Unsigned int32. Clock polarity @ref spi_cpol.
-@param[in] cpha Unsigned int32. Clock Phase @ref spi_cpha.
-@param[in] dff Unsigned int32. Data frame format 8/16 bits @ref spi_dff.
-@param[in] lsbfirst Unsigned int32. Frame format lsb/msb first @ref
-spi_lsbfirst.
-@returns int. Error code.
-*/
-
-int spi_init_master(uint32_t spi, uint32_t br, uint32_t cpol, uint32_t cpha,
-		    uint32_t dff, uint32_t lsbfirst)
-{
-	uint32_t reg32 = SPI_CR1(spi);
-
-	/* Reset all bits omitting SPE, CRCEN and CRCNEXT bits. */
-	reg32 &= SPI_CR1_SPE | SPI_CR1_CRCEN | SPI_CR1_CRCNEXT;
-
-	reg32 |= SPI_CR1_MSTR;	/* Configure SPI as master. */
-
-	reg32 |= br;		/* Set baud rate bits. */
-	reg32 |= cpol;		/* Set CPOL value. */
-	reg32 |= cpha;		/* Set CPHA value. */
-	reg32 |= dff;		/* Set data format (8 or 16 bits). */
-	reg32 |= lsbfirst;	/* Set frame format (LSB- or MSB-first). */
-
-	SPI_CR2(spi) |= SPI_CR2_SSOE; /* common case */
-	SPI_CR1(spi) = reg32;
-
-	return 0;
-}
 
 /*---------------------------------------------------------------------------*/
 /** @brief SPI Set Data Frame Format to 8 bits

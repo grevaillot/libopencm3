@@ -348,6 +348,8 @@ void spi_reset(uint32_t spi_peripheral);
 void spi_enable(uint32_t spi);
 void spi_disable(uint32_t spi);
 uint16_t spi_clean_disable(uint32_t spi);
+int spi_init_master(uint32_t spi, uint32_t br, uint32_t cpol, uint32_t cpha,
+		uint32_t lsbfirst);
 void spi_write(uint32_t spi, uint16_t data);
 void spi_send(uint32_t spi, uint16_t data);
 uint16_t spi_read(uint32_t spi);
