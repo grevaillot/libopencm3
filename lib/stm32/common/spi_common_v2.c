@@ -56,44 +56,6 @@ LSB first.
 
 /**@{*/
 
-/*---------------------------------------------------------------------------*/
-/** @brief Configure the SPI as Master.
-
-The SPI peripheral is configured as a master with communication parameters
-baudrate, frame format lsb/msb first, clock polarity and phase. The SPI 
-enable, CRC enable, CRC next CRC length controls are not affected.
-These must be controlled separately.
-
-@param[in] spi Unsigned int32. SPI peripheral identifier @ref spi_reg_base.
-@param[in] br Unsigned int32. Baudrate @ref spi_baudrate.
-@param[in] cpol Unsigned int32. Clock polarity @ref spi_cpol.
-@param[in] cpha Unsigned int32. Clock Phase @ref spi_cpha.
-@param[in] lsbfirst Unsigned int32. Frame format lsb/msb first @ref
-spi_lsbfirst.
-@returns int. Error code.
-*/
-
-int spi_init_master(uint32_t spi, uint32_t br, uint32_t cpol, uint32_t cpha,
-		    uint32_t lsbfirst)
-{
-	uint32_t reg32 = SPI_CR1(spi);
-
-	/* Reset all bits omitting SPE, CRCEN, CRCNEXT and CRCL bits. */
-	reg32 &= SPI_CR1_SPE | SPI_CR1_CRCEN | SPI_CR1_CRCNEXT | SPI_CR1_CRCL;
-
-	reg32 |= SPI_CR1_MSTR;	/* Configure SPI as master. */
-
-	reg32 |= br;		/* Set baud rate bits. */
-	reg32 |= cpol;		/* Set CPOL value. */
-	reg32 |= cpha;		/* Set CPHA value. */
-	reg32 |= lsbfirst;	/* Set frame format (LSB- or MSB-first). */
-
-	SPI_CR2(spi) |= SPI_CR2_SSOE; /* common case */
-	SPI_CR1(spi) = reg32;
-
-	return 0; /* TODO */
-}
-
 void spi_send8(uint32_t spi, uint8_t data)
 {
 	/* Wait for transfer finished. */
