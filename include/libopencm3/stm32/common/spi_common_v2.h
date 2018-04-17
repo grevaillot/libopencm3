@@ -48,6 +48,8 @@ specific memorymap.h header before including this header file.*/
 /**@}*/
 #define SPI_CR1_CRCL		(1 << 11)
 
+#define SPI_CR1_CRCx_MASK	(SPI_CR1_CRCEN | SPI_CR1_CRCNEXT | SPI_CR1_CRCL)
+
 /* --- SPI_CR2 values ------------------------------------------------------ */
 
 /* LDMA_TX: Last DMA transfer for transmission */
@@ -101,8 +103,6 @@ specific memorymap.h header before including this header file.*/
 /* --- Function prototypes ------------------------------------------------- */
 
 BEGIN_DECLS
-int spi_init_master(uint32_t spi, uint32_t br, uint32_t cpol, uint32_t cpha, 
-		uint32_t lsbfirst);
 void spi_set_crcl_8bit(uint32_t spi);
 void spi_set_crcl_16bit(uint32_t spi);
 void spi_set_data_size(uint32_t spi, uint16_t data_s);
