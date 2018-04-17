@@ -7,30 +7,6 @@ Uwe Hermann <uwe@hermann-uwe.de>
 @author @htmlonly &copy; @endhtmlonly 2012
 Ken Sarkies <ksarkies@internode.on.net>
 
-Devices can have up to three SPI peripherals. The common 4-wire full-duplex
-mode of operation is supported, along with 3-wire variants using unidirectional
-communication modes or half-duplex bidirectional communication. A variety of
-options allows many of the SPI variants to be supported. Multimaster operation
-is also supported. A CRC can be generated and checked in hardware.
-
-@note Some JTAG pins need to be remapped if SPI is to be used.
-
-@note The I2S protocol shares the SPI hardware so the two protocols cannot be
-used at the same time on the same peripheral.
-
-Example: Clk/4, positive clock polarity, leading edge trigger, 8-bit words,
-LSB first.
-@code
-	spi_init_master(SPI1, SPI_CR1_BAUDRATE_FPCLK_DIV_4, SPI_CR1_CPOL_CLK_TO_0_WHEN_IDLE,
-			SPI_CR1_CPHA_CLK_TRANSITION_1, SPI_CR1_LSBFIRST);
-	spi_write(SPI1, 0x55);		// 8-bit write
-	spi_write(SPI1, 0xaa88);	// 16-bit write
-	reg8 = spi_read(SPI1);		// 8-bit read
-	reg16 = spi_read(SPI1);		// 16-bit read
-@endcode
-
-@todo need additional functions to aid ISRs in retrieving status
-
 */
 
 /*
