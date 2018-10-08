@@ -446,8 +446,7 @@ void rcc_set_pll_multiplication_factor(uint32_t mul)
 
 void rcc_set_pll_source(uint32_t pllsrc)
 {
-	RCC_CFGR = (RCC_CFGR & ~RCC_CFGR_PLLSRC) |
-			(pllsrc << 16);
+	RCC_CFGR = (RCC_CFGR & ~RCC_CFGR_PLLSRC) | (pllsrc << 15);
 }
 
 /*---------------------------------------------------------------------------*/
