@@ -404,6 +404,37 @@ extern uint32_t rcc_apb1_frequency;
  */
 #define rcc_apb2_frequency rcc_apb1_frequency
 
+enum rcc_clock_hse {
+	RCC_CLOCK_HSE_08MHZ_48MHZ,
+	RCC_CLOCK_HSE_32MHZ_48MHZ,
+	RCC_CLOCK_HSE_END
+};
+
+enum rcc_clock_pll_hsi {
+	RCC_CLOCK_HSI_48MHZ,
+	RCC_CLOCK_HSI_END
+};
+
+enum rcc_clock_pll_hsi_div2 {
+	RCC_CLOCK_HSI_DIV2_48MHZ,
+	RCC_CLOCK_HSI_DIV2_END
+};
+
+struct rcc_clock_scale {
+	uint32_t pll_mul;
+	uint8_t pll_div;
+	uint8_t pll_source;
+	uint8_t flash_waitstates;
+	uint8_t hpre;
+	uint8_t ppre;
+	uint32_t ahb_frequency;
+	uint32_t apb1_frequency;
+};
+
+extern const struct rcc_clock_scale rcc_pll_hse_configs[RCC_CLOCK_HSE_END];
+extern const struct rcc_clock_scale rcc_pll_hsi_configs[RCC_CLOCK_HSI_END];
+extern const struct rcc_clock_scale rcc_pll_hsi_div2_configs[RCC_CLOCK_HSI_DIV2_END];
+
 enum rcc_osc {
 	RCC_HSI14, RCC_HSI, RCC_HSE, RCC_PLL, RCC_LSI, RCC_LSE, RCC_HSI48
 };
@@ -554,6 +585,7 @@ enum rcc_osc rcc_usb_clock_source(void);
 void rcc_clock_setup_in_hse_8mhz_out_48mhz(void);
 void rcc_clock_setup_in_hsi_out_48mhz(void);
 void rcc_clock_setup_in_hsi48_out_48mhz(void);
+void rcc_clock_setup_pll(const struct rcc_clock_scale *clock);
 
 END_DECLS
 
