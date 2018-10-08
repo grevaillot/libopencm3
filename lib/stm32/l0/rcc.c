@@ -391,9 +391,10 @@ void rcc_set_hpre(uint32_t hpre)
 	RCC_CFGR = reg | (hpre << RCC_CFGR_HPRE_SHIFT);
 }
 
-/**
- * Set up sysclock with PLL from HSI16
- * @param clock full struct with desired parameters
+/*---------------------------------------------------------------------------*/
+/** @brief RCC Setup PLL and use it as Sysclk source.
+ *
+ * @param[in] clock full struct with desired parameters
  */
 void rcc_clock_setup_pll(const struct rcc_clock_scale *clock)
 {
