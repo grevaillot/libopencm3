@@ -624,5 +624,88 @@ void rcc_clock_setup_in_hsi48_out_48mhz(void)
 	rcc_apb1_frequency = 48000000;
 	rcc_ahb_frequency = 48000000;
 }
+
+struct rcc_clock_scale hsi_out_48mhz = {
+	.pll_source = RCC_CFGR_PLLSRC_HSI_CLK_DIV2,
+	.hpre = RCC_CFGR_HPRE_NODIV,
+	.ppre = RCC_CFGR_PPRE_NODIV,
+	.flash_waitstates = FLASH_ACR_LATENCY_024_048MHZ,
+	.pll_mul = RCC_CFGR_PLLMUL_MUL12,
+	.ahb_frequency = 48000000,
+	.apb1_frequency = 48000000,
+};
+
+struct rcc_clock_scale hse_8mhz_out_48mhz = {
+	.pll_source = RCC_CFGR_PLLSRC_HSE_CLK,
+	.hpre = RCC_CFGR_HPRE_NODIV,
+	.ppre = RCC_CFGR_PPRE_NODIV,
+	.flash_waitstates = FLASH_ACR_LATENCY_024_048MHZ,
+	.pll_mul = RCC_CFGR_PLLMUL_MUL6,
+	.pll_div = RCC_CFGR2_PREDIV_NODIV,
+	.ahb_frequency = 48000000,
+	.apb1_frequency = 48000000,
+};
+
+struct rcc_clock_scale hse_32mhz_out_48mhz = {
+	.pll_source = RCC_CFGR_PLLSRC_HSE_CLK,
+	.hpre = RCC_CFGR_HPRE_NODIV,
+	.ppre = RCC_CFGR_PPRE_NODIV,
+	.flash_waitstates = FLASH_ACR_LATENCY_024_048MHZ,
+	.pll_mul = RCC_CFGR_PLLMUL_MUL3,
+	.pll_div = RCC_CFGR2_PREDIV_DIV2,
+	.ahb_frequency = 48000000,
+	.apb1_frequency = 48000000,
+};
+
+/*---------------------------------------------------------------------------*/
+/** @brief RCC Setup PLL and use it as Sysclk source.
+ *
+ * Not all pll_sources and configuration are available on the f0 device
+ * range : Based on RM, only a subset of f0 devices feature HSI48 clock source,
+ * while the remaining parts seem to have their prediv forced to div2 when 
+ * using HSI for pll source..
+ *
+ * @param[in] clock full struct with desired parameters
+ */
+void rcc_clock_setup_pll(const struct rcc_clock_scale *clock)
+{
+	switch (clock->pll_source) {
+		case RCC_CFGR_PLLSRC_HSE_CLK:
+			rcc_osc_on(RCC_HSE);
+			rcc_wait_for_osc_ready(RCC_HSE);
+			break;
+		case RCC_CFGR_PLLSRC_HSI_CLK:
+		case RCC_CFGR_PLLSRC_HSI_CLK_DIV2:
+			rcc_osc_on(RCC_HSI);
+			rcc_wait_for_osc_ready(RCC_HSI);
+			break;
+		case RCC_CFGR_PLLSRC_HSI48_CLK:
+			rcc_osc_on(RCC_HSI48);
+			rcc_wait_for_osc_ready(RCC_HSI48);
+			break;
+	}
+
+	rcc_set_hpre(clock->hpre);
+	rcc_set_ppre(clock->ppre);
+
+	rcc_osc_off(RCC_PLL);
+	while (rcc_is_osc_ready(RCC_PLL));
+
+	flash_prefetch_enable();
+	flash_set_ws(clock->flash_waitstates);
+
+	rcc_set_pll_source(clock->pll_source);
+	rcc_set_pll_multiplication_factor(clock->pll_mul);
+	if (clock->pll_source != RCC_CFGR_PLLSRC_HSI_CLK_DIV2)
+		rcc_set_prediv(clock->pll_div);
+
+	rcc_osc_on(RCC_PLL);
+	rcc_wait_for_osc_ready(RCC_PLL);
+	rcc_set_sysclk_source(RCC_PLL);
+
+	rcc_ahb_frequency = clock->ahb_frequency;
+	rcc_apb1_frequency = clock->apb1_frequency;
+}
+
 /**@}*/
 

@@ -388,6 +388,17 @@ Control</b>
 /* API definitions                                                           */
 /*****************************************************************************/
 
+struct rcc_clock_scale {
+	uint32_t pll_mul;
+	uint8_t pll_div;
+	uint8_t pll_source;
+	uint8_t flash_waitstates;
+	uint8_t hpre;
+	uint8_t ppre;
+	uint32_t ahb_frequency;
+	uint32_t apb1_frequency;
+};
+
 /* --- Variable definitions ------------------------------------------------ */
 extern uint32_t rcc_ahb_frequency;
 extern uint32_t rcc_apb1_frequency;
@@ -542,6 +553,7 @@ enum rcc_osc rcc_usb_clock_source(void);
 void rcc_clock_setup_in_hse_8mhz_out_48mhz(void);
 void rcc_clock_setup_in_hsi_out_48mhz(void);
 void rcc_clock_setup_in_hsi48_out_48mhz(void);
+void rcc_clock_setup_pll(const struct rcc_clock_scale *clock);
 
 END_DECLS
 
