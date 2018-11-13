@@ -138,8 +138,12 @@ LGPL License Terms @ref lgpl_license
 #define LPTIM_IER_UPIE			(1 << 5)
 #define LPTIM_IER_DOWNIE		(1 << 6)
 
+/* --- LPTIMx_CFGR values ----------------------------------------------------- */
+
+/* CKSEL: Select internal (0) or external clock source (1) */
 #define LPTIM_CFGR_CKSEL		(1 << 0)
 
+/* CKPOL: Clock Polarity */
 #define LPTIM_CFGR_CKPOL_SHIFT		1
 #define LPTIM_CFGR_CKPOL		(3 << LPTIM_CFGR_CKPOL_SHIFT)
 #define LPTIM_CFGR_CKPOL_RISING		(0 << LPTIM_CFGR_CKPOL_SHIFT)
@@ -149,18 +153,21 @@ LGPL License Terms @ref lgpl_license
 #define LPTIM_CFGR_CKPOL_ENC_2		(1 << LPTIM_CFGR_CKPOL_SHIFT)
 #define LPTIM_CFGR_CKPOL_ENC_3		(2 << LPTIM_CFGR_CKPOL_SHIFT)
 
+/* CKFLT: External clock digital filter configuration */
 #define LPTIM_CFGR_CKFLT_SHIFT		3
 #define LPTIM_CFGR_CKFLT		(3 << LPTIM_CFGR_CKFLT_SHIFT)
 #define LPTIM_CFGR_CKFLT_2		(1 << LPTIM_CFGR_CKFLT_SHIFT)
 #define LPTIM_CFGR_CKFLT_4		(2 << LPTIM_CFGR_CKFLT_SHIFT)
 #define LPTIM_CFGR_CKFLT_8		(3 << LPTIM_CFGR_CKFLT_SHIFT)
 
+/* TRGFLT: Trigger filter configuration */
 #define LPTIM_CFGR_TRGFLT_SHIFT		6
 #define LPTIM_CFGR_TRGFLT		(3 << LPTIM_CFGR_TRGFLT_SHIFT)
 #define LPTIM_CFGR_TRGFLT_2		(1 << LPTIM_CFGR_TRGFLT_SHIFT)
 #define LPTIM_CFGR_TRGFLT_4		(2 << LPTIM_CFGR_TRGFLT_SHIFT)
 #define LPTIM_CFGR_TRGFLT_8		(3 << LPTIM_CFGR_TRGFLT_SHIFT)
 
+/* PRESC: Clock prescaler */
 #define LPTIM_CFGR_PRESC_SHIFT		9
 #define LPTIM_CFGR_PRESC		(7 << LPTIM_CFGR_PRESC_SHIFT)
 #define LPTIM_CFGR_PRESC_1		(0 << LPTIM_CFGR_PRESC_SHIFT)
@@ -172,6 +179,7 @@ LGPL License Terms @ref lgpl_license
 #define LPTIM_CFGR_PRESC_64		(6 << LPTIM_CFGR_PRESC_SHIFT)
 #define LPTIM_CFGR_PRESC_128		(7 << LPTIM_CFGR_PRESC_SHIFT)
 
+/* TRIGSEL: Trigger selector */
 #define LPTIM_CFGR_TRIGSEL_SHIFT	13
 #define LPTIM_CFGR_TRIGSEL		(7 << LPTIM_CFGR_TRIGSEL_SHIFT)
 #define LPTIM_CFGR_TRIGSEL_EXT_TRIG0	(0 << LPTIM_CFGR_TRIGSEL_SHIFT)
@@ -183,6 +191,7 @@ LGPL License Terms @ref lgpl_license
 #define LPTIM_CFGR_TRIGSEL_EXT_TRIG6	(6 << LPTIM_CFGR_TRIGSEL_SHIFT)
 #define LPTIM_CFGR_TRIGSEL_EXT_TRIG7	(7 << LPTIM_CFGR_TRIGSEL_SHIFT)
 
+/* TRIGEN: Trigger enable and polarity */
 #define LPTIM_CFGR_TRIGEN_SHIFT		17
 #define LPTIM_CFGR_TRIGEN		(3 << LPTIM_CFGR_TRIGEN_SHIFT)
 #define LPTIM_CFGR_TRIGEN_SW		(0 << LPTIM_CFGR_TRIGEN_SHIFT)
@@ -190,22 +199,33 @@ LGPL License Terms @ref lgpl_license
 #define LPTIM_CFGR_TRIGEN_FALLING	(2 << LPTIM_CFGR_TRIGEN_SHIFT)
 #define LPTIM_CFGR_TRIGEN_BOTH		(3 << LPTIM_CFGR_TRIGEN_SHIFT)
 
+/* TIMOUT: Timeout enable */
 #define LPTIM_CFGR_TIMOUT		(1 << 19)
 
+/* WAVE: Waveform shape */
 #define LPTIM_CFGR_WAVE			(1 << 20)
 
+/* WAVPOL: Waveform shape polarity */
 #define LPTIM_CFGR_WAVPOL		(1 << 21)
 
+/* PRELOAD: Register update mode */
 #define LPTIM_CFGR_PRELOAD		(1 << 22)
 
+/* COUNTMODE: Counter mode enable */
 #define LPTIM_CFGR_COUNTMODE		(1 << 23)
 
+/* ENC: Encoder mode enable */
 #define LPTIM_CFGR_ENC			(1 << 24)
 
+/* --- LPTIMx_CR values ----------------------------------------------------- */
+
+/* ENABLE: Counter enable */
 #define LPTIM_CR_ENABLE			(1 << 0)
 
+/* SNGSTRT: Start in Single Mode */
 #define LPTIM_CR_SNGSTRT		(1 << 1)
 
+/* SNGSTRT: Start in Continuous Mode */
 #define LPTIM_CR_CNTSTRT		(1 << 2)
 
 #endif
