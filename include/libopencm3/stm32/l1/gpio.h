@@ -51,6 +51,8 @@ LGPL License Terms @ref lgpl_license
 #define GPIOC				GPIO_PORT_C_BASE
 #define GPIOD				GPIO_PORT_D_BASE
 #define GPIOE				GPIO_PORT_E_BASE
+#define GPIOF				GPIO_PORT_F_BASE
+#define GPIOG				GPIO_PORT_G_BASE
 #define GPIOH				GPIO_PORT_H_BASE
 /**@}*/
 
@@ -63,6 +65,8 @@ LGPL License Terms @ref lgpl_license
 #define GPIOC_MODER			GPIO_MODER(GPIOC)
 #define GPIOD_MODER			GPIO_MODER(GPIOD)
 #define GPIOE_MODER			GPIO_MODER(GPIOE)
+#define GPIOF_MODER			GPIO_MODER(GPIOF)
+#define GPIOG_MODER			GPIO_MODER(GPIOG)
 #define GPIOH_MODER			GPIO_MODER(GPIOH)
 
 /* Port output type register (GPIOx_OTYPER) */
@@ -72,6 +76,8 @@ LGPL License Terms @ref lgpl_license
 #define GPIOC_OTYPER			GPIO_OTYPER(GPIOC)
 #define GPIOD_OTYPER			GPIO_OTYPER(GPIOD)
 #define GPIOE_OTYPER			GPIO_OTYPER(GPIOE)
+#define GPIOF_OTYPER			GPIO_OTYPER(GPIOF)
+#define GPIOG_OTYPER			GPIO_OTYPER(GPIOG)
 #define GPIOH_OTYPER			GPIO_OTYPER(GPIOH)
 
 /* Port output speed register (GPIOx_OSPEEDR) */
@@ -81,6 +87,8 @@ LGPL License Terms @ref lgpl_license
 #define GPIOC_OSPEEDR			GPIO_OSPEEDR(GPIOC)
 #define GPIOD_OSPEEDR			GPIO_OSPEEDR(GPIOD)
 #define GPIOE_OSPEEDR			GPIO_OSPEEDR(GPIOE)
+#define GPIOF_OSPEEDR			GPIO_OSPEEDR(GPIOF)
+#define GPIOG_OSPEEDR			GPIO_OSPEEDR(GPIOG)
 #define GPIOH_OSPEEDR			GPIO_OSPEEDR(GPIOH)
 
 /* Port pull-up/pull-down register (GPIOx_PUPDR) */
@@ -90,6 +98,8 @@ LGPL License Terms @ref lgpl_license
 #define GPIOC_PUPDR                     GPIO_PUPDR(GPIOC)
 #define GPIOD_PUPDR                     GPIO_PUPDR(GPIOD)
 #define GPIOE_PUPDR                     GPIO_PUPDR(GPIOE)
+#define GPIOF_PUPDR                     GPIO_PUPDR(GPIOF)
+#define GPIOG_PUPDR                     GPIO_PUPDR(GPIOG)
 #define GPIOH_PUPDR                     GPIO_PUPDR(GPIOH)
 
 /* Port input data register (GPIOx_IDR) */
@@ -99,6 +109,8 @@ LGPL License Terms @ref lgpl_license
 #define GPIOC_IDR			GPIO_IDR(GPIOC)
 #define GPIOD_IDR			GPIO_IDR(GPIOD)
 #define GPIOE_IDR			GPIO_IDR(GPIOE)
+#define GPIOF_IDR			GPIO_IDR(GPIOF)
+#define GPIOG_IDR			GPIO_IDR(GPIOG)
 #define GPIOH_IDR			GPIO_IDR(GPIOH)
 
 /* Port output data register (GPIOx_ODR) */
@@ -108,6 +120,8 @@ LGPL License Terms @ref lgpl_license
 #define GPIOC_ODR			GPIO_ODR(GPIOC)
 #define GPIOD_ODR			GPIO_ODR(GPIOD)
 #define GPIOE_ODR			GPIO_ODR(GPIOE)
+#define GPIOF_ODR			GPIO_ODR(GPIOF)
+#define GPIOG_ODR			GPIO_ODR(GPIOG)
 #define GPIOH_ODR			GPIO_ODR(GPIOH)
 
 /* Port bit set/reset register (GPIOx_BSRR) */
@@ -117,6 +131,8 @@ LGPL License Terms @ref lgpl_license
 #define GPIOC_BSRR			GPIO_BSRR(GPIOC)
 #define GPIOD_BSRR			GPIO_BSRR(GPIOD)
 #define GPIOE_BSRR			GPIO_BSRR(GPIOE)
+#define GPIOF_BSRR			GPIO_BSRR(GPIOF)
+#define GPIOG_BSRR			GPIO_BSRR(GPIOG)
 #define GPIOH_BSRR			GPIO_BSRR(GPIOH)
 
 /* Port configuration lock register (GPIOx_LCKR) */
