@@ -27,9 +27,9 @@ TGT_CFLAGS	= -Os \
 		  -Wredundant-decls -Wmissing-prototypes -Wstrict-prototypes \
 		  -Wundef -Wshadow \
 		  -I../../../include -fno-common \
-		  -mcpu=cortex-m3 -mthumb $(FP_FLAGS) -Wstrict-prototypes \
+		  -mcpu=cortex-m3 -mthumb $(FP_FLAGS) \
 		  -ffunction-sections -fdata-sections -MD -DSTM32F2
-TGT_CFLAGS      += $(DEBUG_FLAGS)
+TGT_CFLAGS	+= $(DEBUG_FLAGS)
 TGT_CFLAGS	+= $(STANDARD_FLAGS)
 # ARFLAGS	= rcsv
 ARFLAGS		= rcs
