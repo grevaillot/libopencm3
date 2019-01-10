@@ -33,7 +33,6 @@ TGT_CFLAGS	= -Os \
 		  -Wundef -Wshadow \
 		  -I../../../include -fno-common \
 		  -mcpu=cortex-m7 -mthumb $(FP_FLAGS) \
-		  -Wstrict-prototypes \
 		  -ffunction-sections -fdata-sections -MD -DSTM32F7
 TGT_CFLAGS	+= $(DEBUG_FLAGS)
 TGT_CFLAGS	+= $(STANDARD_FLAGS)
