@@ -53,6 +53,9 @@ void rcc_set_mco(uint32_t mcosrc);
 void rcc_osc_bypass_enable(enum rcc_osc osc);
 void rcc_osc_bypass_disable(enum rcc_osc osc);
 
+void rcc_osc_on(enum rcc_osc osc);
+void rcc_osc_off(enum rcc_osc osc);
+
 /**
  * Is the given oscillator ready?
  * @param osc Oscillator ID
