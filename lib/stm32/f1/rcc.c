@@ -238,11 +238,6 @@ bool rcc_is_osc_ready(enum rcc_osc osc)
 	return false;
 }
 
-void rcc_wait_for_osc_ready(enum rcc_osc osc)
-{
-	while (!rcc_is_osc_ready(osc));
-}
-
 /*---------------------------------------------------------------------------*/
 /** @brief RCC Turn on an Oscillator.
 

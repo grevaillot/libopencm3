@@ -257,6 +257,11 @@ void rcc_osc_bypass_disable(enum rcc_osc osc)
 	}
 }
 
+void rcc_wait_for_osc_ready(enum rcc_osc osc)
+{
+	while (!rcc_is_osc_ready(osc));
+}
+
 /**@}*/
 
 #undef _RCC_REG
