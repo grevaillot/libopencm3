@@ -249,6 +249,21 @@ stm32g0[BC]1?c* stm32g0 ROM=256K RAM=128K
 stm32g0[BC]1?e* stm32g0 ROM=512K RAM=128K
 
 ################################################################################
+# the SAM0 chips
+
+samd10?13* samd ROM=8K RAM=4K
+samd10?14* samd ROM=16K RAM=4K
+
+saml21?18* saml ROM=256K RAM=32K
+saml21?17* saml ROM=128K RAM=16K
+saml21?16* saml ROM=64K RAM=8K
+saml21?15* saml ROM=32 RAM=4K
+
+samr3[45]?18* samr ROM=256K RAM=32K
+samr3[45]?17* samr ROM=128K RAM=16K
+samr3[45]?16* samr ROM=64K RAM=8K
+
+################################################################################
 # the SAM3 chips
 
 sam3a4* sam3a ROM=256K RAM=32K RAM1=32K
@@ -274,9 +289,6 @@ sam3x4c* sam3x ROM=256K RAM=32K RAM1=32K
 sam3x4e* sam3xnfc ROM=256K RAM=32K RAM1=32K
 sam3x8c* sam3x ROM=512K RAM=64K RAM1=32K
 sam3x8e* sam3xnfc ROM=512K RAM=64K RAM1=32K
-
-samd10?13* samd ROM=8K RAM=4K
-samd10?14* samd ROM=16K RAM=4K
 
 ################################################################################
 # the SAM4 chips
@@ -522,6 +534,12 @@ stm32w END ROM_OFF=0x08000000 RAM_OFF=0x20000000 CPU=cortex-m3 FPU=soft
 stm32t END ROM_OFF=0x08000000 RAM_OFF=0x20000000 CPU=cortex-m3 FPU=soft
 
 ################################################################################
+# the SAM0 families
+samd END ROM_OFF=0x00000000 RAM_OFF=0x20000000 CPU=cortex-m0plus FPU=soft
+saml END ROM_OFF=0x00000000 RAM_OFF=0x20000000 CPU=cortex-m0plus FPU=soft
+samr END ROM_OFF=0x00000000 RAM_OFF=0x20000000 CPU=cortex-m0plus FPU=soft
+
+################################################################################
 # the SAM3 families
 
 sam3a END ROM_OFF=0x00080000 RAM_OFF=0x20000000 RAM1_OFF=0x20080000 CPU=cortex-m3 FPU=soft
@@ -529,7 +547,6 @@ sam3n END ROM_OFF=0x00400000 RAM_OFF=0x20000000 CPU=cortex-m3 FPU=soft
 sam3s END ROM_OFF=0x00400000 RAM_OFF=0x20000000 CPU=cortex-m3 FPU=soft
 sam3u END ROM_OFF=0x00080000 RAM_OFF=0x20000000 RAM1_OFF=0x20080000 NFCRAM=4K NFCRAM_OFF=0x20100000 CPU=cortex-m3 FPU=soft
 sam3x END ROM_OFF=0x00080000 RAM_OFF=0x20000000 RAM1_OFF=0x20080000 CPU=cortex-m3 FPU=soft
-samd END ROM_OFF=0x00000000 RAM_OFF=0x20000000 CPU=cortex-m0plus FPU=soft
 
 ################################################################################
 # the SAM4 families
