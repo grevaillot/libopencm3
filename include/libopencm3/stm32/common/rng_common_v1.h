@@ -1,4 +1,4 @@
-/** @addtogroup rng_file
+/** @addtogroup rng_defines
  */
 /*
  * This file is part of the libopencm3 project.
