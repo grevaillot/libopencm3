@@ -7,6 +7,7 @@ GZ_ALL := $(wildcard Makefile.*)
 
 all: $(GZ_ALL:=.all)
 clean: $(GZ_ALL:=.clean)
+	-rm generated*
 
 %.all:
 	$(MAKE) -f $* all

@@ -16,14 +16,15 @@
 ##
 
 BOARD = tilm4f120xl
+DEVICE ?= lm4f120xl
 PROJECT = usb-gadget0-$(BOARD)
 BUILD_DIR = bin-$(BOARD)
 
 SHARED_DIR = ../shared
 
 CFILES = main-$(BOARD).c
-CFILES += usb-gadget0.c trace.c trace_stdio.c
-#CFILES += delay.c
+CFILES += usb-gadget0.c
+CFILES += trace.c trace_stdio.c
 
 VPATH += $(SHARED_DIR)
 
@@ -32,11 +33,8 @@ INCLUDES += $(patsubst %,-I%, . $(SHARED_DIR))
 OPENCM3_DIR=../..
 
 ### This section can go to an arch shared rules eventually...
-DEVICE=lm4f120xl
 OOCD_FILE = openocd.$(BOARD).cfg
 
 include $(OPENCM3_DIR)/mk/genlink-config.mk
-#include $(OPENCM3_DIR)/mk/gcc-config.mk
 include $(OPENCM3_DIR)/mk/genlink-rules.mk
 include ../rules.mk
-#include $(OPENCM3_DIR)/mk/gcc-rules.mk
