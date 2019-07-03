@@ -183,6 +183,51 @@ void adc_set_regular_sequence(uint32_t adc, uint8_t length, uint8_t channel[])
 	}
 }
 
+/** @brief ADC Set an Injected Channel Conversion Sequence
+ *
+ * Setup the ADC in fully configurable sequence mode, and set a user defined
+ * sequence of channels to be converted. ADCSTART must be de-asserted before
+ * sequence setup.
+ * Note that on STM32G0, the sequence is limited to 8 channels, and
+ * only the first 14 ADC channels are selectable.
+ *
+ * @param[in] adc ADC base address (@ref adc_reg_base)
+ * @param[in] length Number of channels in the group, range 0..8
+ * @param[in] channel Set of channels in sequence (0..14 or @ref adc_channel)
+ */
+void adc_set_injected_sequence(uint32_t adc, uint8_t length, uint8_t channel[])
+{
+	uint32_t reg32 = 0;
+
+	if (length > ADC_CHSELR_MAX_SQS) {
+		cm3_assert_not_reached();
+		return;
+	}
+
+	/* Setup ADC in fully configurable mode, if needed  */
+	if (!(ADC_CFGR1(adc) & ADC_CFGR1_CHSELRMOD)) {
+		ADC_ISR(adc) &= ~ADC_ISR_CCRDY;
+		ADC_CFGR1(adc) |= ADC_CFGR1_CHSELRMOD;
+		while (!(ADC_ISR(adc) & ADC_ISR_CCRDY));
+	}
+	
+	if (length < ADC_CHSELR_MAX_SQS) {
+		/* set end of sequence marker if we dont use the full sequence */
+		reg32 |= ADC_CHSELR_SQx(length + 1, ADC_CHSELR_SQx_EOS);
+	}
+
+	for (uint8_t i = 1; i <= length; i++) {
+		reg32 |= ADC_CHSELR_SQx(i, channel[i - 1]);
+	}
+
+	/* apply new sequence and wait for ccrdy, if different. */
+	if (ADC_CHSELR(adc) != reg32) {
+		ADC_ISR(adc) &= ~ADC_ISR_CCRDY;
+		ADC_CHSELR(adc) = reg32;
+		while (!(ADC_ISR(adc) & ADC_ISR_CCRDY));
+	}
+}
+
 /**
  * @brief Enable the ADC Voltage regulator
  *
