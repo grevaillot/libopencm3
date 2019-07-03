@@ -314,6 +314,8 @@ void adc_set_clk_prescale(uint32_t adc, uint32_t prescale);
 void adc_set_channel_sample_time_selection(uint32_t adc, uint8_t channel, uint8_t selection);
 void adc_set_selection_sample_time(uint32_t adc, uint8_t selection, uint8_t time);
 
+void adc_set_injected_sequence(uint32_t adc, uint8_t length, uint8_t channel[]);
+
 void adc_enable_regulator(uint32_t adc);
 void adc_disable_regulator(uint32_t adc);
 
