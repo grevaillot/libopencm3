@@ -1,6 +1,6 @@
 /** @defgroup port_defines PORT Defines
  *
- * @ingroup SAMD_defines
+ * @ingroup SAML_defines
  *
  * This file is part of the libopencm3 project.
  *
@@ -24,4 +24,5 @@
 
 #include <libopencm3/sam/memorymap.h>
 #include <libopencm3/sam/common/port_common_dlr.h>
+#include <libopencm3/sam/common/port_common_lr.h>
 

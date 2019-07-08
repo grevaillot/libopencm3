@@ -1,10 +1,9 @@
-/** @defgroup port_defines PORT Defines
- *
- * @ingroup SAMD_defines
- *
+/* This provides unification of code over SAM subfamilies */
+
+/*
  * This file is part of the libopencm3 project.
  *
- * Copyright (C) 2016 Karl Palsson <karlp@tweak.net.au>
+ * Copyright (C) 2019 Guillaume Revaillot <g.revaillot@gmail.com>
  *
  * This library is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -20,8 +19,12 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
-
-#include <libopencm3/sam/memorymap.h>
-#include <libopencm3/sam/common/port_common_dlr.h>
-
+#if defined(SAMD)
+#       include <libopencm3/sam/d/port.h>
+#elif defined(SAML)
+#       include <libopencm3/sam/l/port.h>
+#elif defined(SAMR)
+#       include <libopencm3/sam/r/port.h>
+#else
+#       error "sam family not defined."
+#endif

@@ -1,10 +1,10 @@
 /** @defgroup port_defines PORT Defines
  *
- * @ingroup SAMD_defines
+ * @ingroup SAMR_defines
  *
  * This file is part of the libopencm3 project.
  *
- * Copyright (C) 2016 Karl Palsson <karlp@tweak.net.au>
+ * Copyright (C) 2019 Guillaume Revaillot <revaillot@archos.com>
  *
  * This library is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -24,4 +24,5 @@
 
 #include <libopencm3/sam/memorymap.h>
 #include <libopencm3/sam/common/port_common_dlr.h>
+#include <libopencm3/sam/common/port_common_lr.h>
 
