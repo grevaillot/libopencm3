@@ -22,12 +22,16 @@ SRCLIBDIR	?= ../..
 
 CC		= $(PREFIX)gcc
 AR		= $(PREFIX)ar
-TGT_CFLAGS	= -Os -Wall -Wextra -I../../../include -fno-common \
-		  -mcpu=cortex-m0plus -mthumb $(FP_FLAGS) -Wstrict-prototypes \
+TGT_CFLAGS	= -Os \
+		  -Wall -Wextra -Wimplicit-function-declaration \
+		  -Wredundant-decls -Wmissing-prototypes -Wstrict-prototypes \
+		  -Wundef -Wshadow \
+		  -I../../../include -fno-common \
+		  -mcpu=cortex-m0plus -mthumb $(FP_FLAGS) \
 		  -ffunction-sections -fdata-sections -MD -DSAMD
-TGT_CFLAGS      += $(DEBUG_FLAGS)
+TGT_CFLAGS  += $(DEBUG_FLAGS)
 TGT_CFLAGS	+= $(STANDARD_FLAGS)
-# ARFLAGS	= rcsv
+
 ARFLAGS		= rcs
 OBJS		= 
 
