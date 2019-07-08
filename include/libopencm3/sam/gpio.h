@@ -1,5 +1,4 @@
 /* This provides unification of code over SAM subfamilies */
-
 /*
  * This file is part of the libopencm3 project.
  *
@@ -31,6 +30,12 @@
 #       include <libopencm3/sam/3x/gpio.h>
 #elif defined(SAM4L)
 #       include <libopencm3/sam/4l/gpio.h>
+#elif defined(SAMD)
+#       include <libopencm3/sam/d/gpio.h>
+#elif defined(SAML)
+#       include <libopencm3/sam/l/gpio.h>
+#elif defined(SAMR)
+#       include <libopencm3/sam/r/gpio.h>
 #else
 #       error "sam family not defined."
 #endif

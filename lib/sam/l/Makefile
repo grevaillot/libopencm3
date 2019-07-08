@@ -34,8 +34,9 @@ TGT_CFLAGS	+= $(STANDARD_FLAGS)
 
 ARFLAGS		= rcs
 
-OBJS		=
+OBJS		= gpio_common_dlr.o
 
 VPATH +=../:../../cm3:../common
 
 include ../../Makefile.include
+
