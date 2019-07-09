@@ -35,6 +35,7 @@ TGT_CFLAGS	+= $(STANDARD_FLAGS)
 ARFLAGS		= rcs
 
 OBJS		= gpio_common_dlr.o
+OBJS		+= nvmctrl_common_dlr.o
 OBJS		+= oscctrl_common_lr.o
 
 VPATH +=../:../../cm3:../common
