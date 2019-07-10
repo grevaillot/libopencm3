@@ -48,4 +48,6 @@
 #define DAC_BASE			(0x42002800U)
 #define PTC_BASE			(0x42002c00U)
 
+#define NVM_SOFTWARE_CALIBRATION_ROW	(0x00806020U)
+
 #endif

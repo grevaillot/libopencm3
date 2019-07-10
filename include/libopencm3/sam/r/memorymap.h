@@ -72,4 +72,6 @@
 /* --- SAML IOBUS --------------------------------------------------------*/
 #define PORT_IOBUS_BASE			(0x60000000U)
 
+#define NVM_SOFTWARE_CALIBRATION_ROW	(0x00806020U)
+
 #endif
