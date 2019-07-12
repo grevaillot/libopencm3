@@ -1,7 +1,10 @@
-/* This provides unification of code over SAM subfamilies */
-
-/*
+/** @defgroup pm_defines PM Defines
+ *
+ * @ingroup SAMR_defines
+ *
  * This file is part of the libopencm3 project.
+ *
+ * Copyright (C) 2019 Guillaume Revaillot <revaillot@archos.com>
  *
  * This library is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -17,14 +20,8 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#if defined(SAM4L)
-#       include <libopencm3/sam/4l/pm.h>
-#elif defined(SAMD)
-#       include <libopencm3/sam/d/pm.h>
-#elif defined(SAML)
-#       include <libopencm3/sam/l/pm.h>
-#elif defined(SAMR)
-#       include <libopencm3/sam/r/pm.h>
-#else
-#       error "PM undefined for your processor family."
-#endif
+#pragma once
+
+#include <libopencm3/sam/memorymap.h>
+#include <libopencm3/sam/common/pm_common_dlr.h>
+

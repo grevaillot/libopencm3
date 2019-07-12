@@ -36,6 +36,7 @@ ARFLAGS		= rcs
 
 OBJS		= gpio_common_dlr.o
 OBJS		+= nvmctrl_common_dlr.o
+OBJS		+= pm.o
 OBJS		+= sysctrl.o
 
 VPATH += ../../cm3:../common
