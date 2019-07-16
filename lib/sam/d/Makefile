@@ -34,7 +34,8 @@ TGT_CFLAGS	+= $(STANDARD_FLAGS)
 
 ARFLAGS		= rcs
 
-OBJS		= gpio_common_dlr.o
+OBJS		= gclk.o
+OBJS		+= gpio_common_dlr.o
 OBJS		+= nvmctrl_common_dlr.o
 OBJS		+= pm.o
 OBJS		+= sysctrl.o
