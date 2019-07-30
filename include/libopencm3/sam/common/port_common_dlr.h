@@ -75,6 +75,7 @@
 #define PORT_PMUX(port, n)		MMIO8((port) + 0x0030 + (n))
 
 /** Pin configuration registers */
+// XXX review me
 #define PORT_PINCFG(port, n)		MMIO8((port) + 0x0040 + (n))
 
 /**@}*/
