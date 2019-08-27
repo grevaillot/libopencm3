@@ -256,7 +256,6 @@ stm32g4?1?e* stm32g4ccm ROM=512K RAM=96K CCM=16K
 stm32g4?[34]?b* stm32g4ccm ROM=128K RAM=96K CCM=32K
 stm32g4?[34]?c* stm32g4ccm ROM=256K RAM=96K CCM=32K
 stm32g4?[34]?e* stm32g4ccm ROM=512K RAM=96K CCM=32K
-
 ################################################################################
 # the SAM3 chips
 
