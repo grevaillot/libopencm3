@@ -1,7 +1,7 @@
 ##
 ## This file is part of the libopencm3 project.
 ##
-## Copyright (C) 2020 Karl Palsson <karlp@tweak.net.au>
+## Copyright (C) 2019 Guillaume Revaillot <g.revaillot@gmail.com>
 ##
 ## This library is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU Lesser General Public License as published by
@@ -30,8 +30,9 @@ TGT_CFLAGS	= -Os \
 		  -I../../../include -fno-common \
 		  -mcpu=cortex-m4 -mthumb $(FP_FLAGS) \
 		  -ffunction-sections -fdata-sections -MD -DSTM32G4
-TGT_CFLAGS      += $(DEBUG_FLAGS)
+TGT_CFLAGS	+= $(DEBUG_FLAGS)
 TGT_CFLAGS	+= $(STANDARD_FLAGS)
+
 ARFLAGS		= rcs
 
 OBJS += gpio_common_all.o gpio_common_f0234.o
