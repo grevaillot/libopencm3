@@ -31,6 +31,8 @@
 #ifndef LIBOPENCM3_RCC_H
 #define LIBOPENCM3_RCC_H
 
+#include <libopencm3/stm32/pwr.h>
+
 /* --- RCC: Reset and clock control --------------------------------- */
 
 /** @defgroup rcc_registers Reset and clock control Register
