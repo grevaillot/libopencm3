@@ -93,7 +93,7 @@
         "dma2d",
         "sai2",
         "quadspi",
-        "lp_timer1",
+        "lptimer1",
         "hdmi_cec",
         "i2c4_ev",
         "i2c4_er",
