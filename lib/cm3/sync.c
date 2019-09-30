@@ -25,8 +25,8 @@ void __dmb()
 	__asm__ volatile ("dmb");
 }
 
-/* Those are defined only on CM3 or CM4 */
-#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
+/* Those are defined only on ARMv7 and above */
+#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
 
 uint32_t __ldrex(volatile uint32_t *addr)
 {

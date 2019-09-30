@@ -47,7 +47,7 @@
 #define DWT_CTRL			MMIO32(DWT_BASE + 0x00)
 
 /* Those defined only on ARMv7 and above */
-#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
+#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
 
 /**
  * DWT_CYCCNT register
@@ -83,11 +83,15 @@
 #define DWT_LSUCNT			MMIO32(DWT_BASE + 0x14)
 #define DWT_FOLDCNT			MMIO32(DWT_BASE + 0x18)
 
-#endif /* defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) */
+#endif /* defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__) */
 
 #define DWT_PCSR			MMIO32(DWT_BASE + 0x1C)
 #define DWT_COMP(n)			MMIO32(DWT_BASE + 0x20 + (n) * 16)
+
+#if  defined(__ARM_ARCH_6M__) || defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
 #define DWT_MASK(n)			MMIO32(DWT_BASE + 0x24 + (n) * 16)
+#endif /* defined(__ARM_ARCH_6M__) || defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) */
+
 #define DWT_FUNCTION(n)			MMIO32(DWT_BASE + 0x28 + (n) * 16)
 
 /* CoreSight Lock Status Register for this peripheral */
@@ -106,12 +110,16 @@
 #define DWT_CTRL_NUMCOMP		(0x0F << DWT_CTRL_NUMCOMP_SHIFT)
 
 /* Those defined only on ARMv7 and above */
-#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
+#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
 
 #define DWT_CTRL_NOTRCPKT		(1 << 27)
 #define DWT_CTRL_NOEXTTRIG		(1 << 26)
 #define DWT_CTRL_NOCYCCNT		(1 << 25)
 #define DWT_CTRL_NOPRFCCNT		(1 << 24)
+
+#if defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
+#define DWT_CTRL_CYCDISS		(1 << 23)
+#endif
 
 #define DWT_CTRL_CYCEVTENA		(1 << 22)
 #define DWT_CTRL_FOLDEVTENA		(1 << 21)
@@ -144,7 +152,7 @@
  */
 #define DWT_CTRL_CYCCNTENA		(1 << 0)
 
-#endif /* defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) */
+#endif /* defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__) */
 
 /* --- DWT_MASK(x) values -------------------------------------------------- */
 

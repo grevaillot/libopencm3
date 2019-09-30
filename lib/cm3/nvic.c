@@ -180,8 +180,7 @@ void nvic_set_priority(uint8_t irqn, uint8_t priority)
 	}
 }
 
-/* Those are defined only on CM3 or CM4 */
-#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
+#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
 /*---------------------------------------------------------------------------*/
 /** @brief NVIC Return Active Interrupt
  *

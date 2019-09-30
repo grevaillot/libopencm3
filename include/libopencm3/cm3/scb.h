@@ -75,7 +75,7 @@
 #define SCB_DFSR				MMIO32(SCB_BASE + 0x30)
 
 /* Those defined only on ARMv7 and above */
-#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
+#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
 /** CFSR: Configurable Fault Status Registers */
 #define SCB_CFSR				MMIO32(SCB_BASE + 0x28)
 
@@ -164,13 +164,22 @@
 #define SCB_CPUID_VARIANT_LSB		20
 #define SCB_CPUID_VARIANT		(0xF << SCB_CPUID_VARIANT_LSB)
 /** Constant[19:16]
+ * on ARMv6m/v7m :
  * Reads as 0xF (ARMv7-M) M3, M4
  * Reads as 0xC (ARMv6-M) M0, M0+
+ * on ARMv8m :
+ * Reads as 0xF (ARMv8-M Baseline) M23
+ * Reads as 0xC (ARMv8-M Mainline ) M33
  */
 #define SCB_CPUID_CONSTANT_LSB		16
 #define SCB_CPUID_CONSTANT		(0xF << SCB_CPUID_CONSTANT_LSB)
+#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
 #define SCB_CPUID_CONSTANT_ARMV6	(0xC << SCB_CPUID_CONSTANT_LSB)
 #define SCB_CPUID_CONSTANT_ARMV7	(0xF << SCB_CPUID_CONSTANT_LSB)
+#elif defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
+#define SCB_CPUID_CONSTANT_ARMV8_BASELINE	(0xC << SCB_CPUID_CONSTANT_LSB) 
+#define SCB_CPUID_CONSTANT_ARMV8_MAINLINE	(0xF << SCB_CPUID_CONSTANT_LSB)
+#endif
 
 /** PartNo[15:4]: Part number of the processor */
 #define SCB_CPUID_PARTNO_LSB		4
@@ -186,7 +195,9 @@
  */
 /** NMIPENDSET: NMI set-pending bit */
 #define SCB_ICSR_NMIPENDSET		(1 << 31)
-/* Bits [30:29]: reserved - must be kept cleared */
+/** NMIPENDCLR: NMI clear-pending bit */
+#define SCB_ICSR_NMIPENDCLR		(1 << 30)
+/* Bits 29: reserved - must be kept cleared */
 /** PENDSVSET: PendSV set-pending bit */
 #define SCB_ICSR_PENDSVSET		(1 << 28)
 /** PENDSVCLR: PendSV clear-pending bit */
@@ -196,7 +207,7 @@
 /** PENDSTCLR: SysTick exception clear-pending bit */
 #define SCB_ICSR_PENDSTCLR		(1 << 25)
 /* Bit 24: reserved - must be kept cleared */
-/** Bit 23: reserved for debug - reads as 0 when not in debug mode */
+/** ISRPREMPT: Interrupt preempt */
 #define SCB_ICSR_ISRPREEMPT		(1 << 23)
 /** ISRPENDING: Interrupt pending flag, excluding NMI and Faults */
 #define SCB_ICSR_ISRPENDING		(1 << 22)
@@ -218,7 +229,7 @@
 
 /* IMPLEMENTATION DEFINED */
 
-#if defined(__ARM_ARCH_6M__)
+#if defined(__ARM_ARCH_6M__) || defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
 
 #define SCB_VTOR_TBLOFF_LSB		7
 #define SCB_VTOR_TBLOFF			(0x1FFFFFF << SCB_VTOR_TBLOFF_LSB)
@@ -227,7 +238,6 @@
 /* VTOR not defined there */
 
 #elif defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
-
 /* Bits [31:30]: reserved - must be kept cleared */
 /* TBLOFF[29:9]: Vector table base offset field */
 /* inconsistent datasheet - LSB could be 11 */
@@ -251,8 +261,13 @@
 /** ENDIANNESS Data endianness bit */
 #define SCB_AIRCR_ENDIANESS			(1 << 15)
 
+#if defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
+/** PRIS Prioritize Secure exceptions */
+#define SCB_AIRCR_PRIS			(1 << 14)
+#endif
+
 /* Those defined only on ARMv7 and above */
-#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
+#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
 /* Bits [14:11]: reserved - must be kept cleared */
 /** PRIGROUP[10:8]: Interrupt priority grouping field */
 #define SCB_AIRCR_PRIGROUP_GROUP16_NOSUB	(0x3 << 8)
@@ -270,7 +285,7 @@
 /** VECTCLRACTIVE clears state information for exceptions */
 #define SCB_AIRCR_VECTCLRACTIVE			(1 << 1)
 
-/* Those defined only on ARMv7 and above */
+/* Those defined only on ARMv7 */
 #if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
 /** VECTRESET cause local system reset */
 #define SCB_AIRCR_VECTRESET			(1 << 0)
@@ -482,6 +497,9 @@ void scb_reset_system(void) __attribute__((noreturn));
 /* Those defined only on ARMv7 and above */
 #if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
 void scb_reset_core(void) __attribute__((noreturn));
+#endif
+
+#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
 void scb_set_priority_grouping(uint32_t prigroup);
 #endif
 

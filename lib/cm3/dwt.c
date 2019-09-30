@@ -61,7 +61,7 @@ bool dwt_enable_cycle_counter(void)
 	return false;			/* Not supported on ARMv6M */
 #endif /* defined(__ARM_ARCH_6M__) */
 
-#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
+#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
 	/* Note TRCENA is for 7M and above*/
 	SCS_DEMCR |= SCS_DEMCR_TRCENA;
 	if (DWT_CTRL & DWT_CTRL_NOCYCCNT) {
@@ -71,7 +71,7 @@ bool dwt_enable_cycle_counter(void)
 	DWT_CYCCNT = 0;
 	DWT_CTRL |= DWT_CTRL_CYCCNTENA;
 	return true;
-#endif /* defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) */
+#endif /* defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__) */
 
 	/* not supported on other architectures */
 	return false;
@@ -93,13 +93,13 @@ uint32_t dwt_read_cycle_counter(void)
 	return 0;		/* Not supported on ARMv6M */
 #endif /* defined(__ARM_ARCH_6M__) */
 
-#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
+#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
 	if (DWT_CTRL & DWT_CTRL_CYCCNTENA) {
 		return DWT_CYCCNT;
 	} else {
 		return 0;		/* not supported or enabled */
 	}
-#endif /* defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) */
+#endif /* defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__) */
 }
 
 /**@}*/
