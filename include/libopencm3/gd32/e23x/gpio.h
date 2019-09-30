@@ -1,4 +1,15 @@
-/* This provides unification of code over GD32 subfamilies */
+/** @defgroup gpio_defines GPIO Defines
+ *
+ * @brief <b>Defined Constants and Types for the GD32F1x0 General Purpose I/O</b>
+ *
+ * @ingroup GD32E23x_defines
+ *
+ * @version 1.0.0
+ *
+ * @date 30 Sept 2019
+ *
+ * LGPL License Terms @ref lgpl_license
+ */
 
 /*
  * This file is part of the libopencm3 project.
@@ -17,14 +28,4 @@
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <libopencm3/cm3/common.h>
-#include <libopencm3/gd32/memorymap.h>
-
-#if defined(GD32F1X0)
-#       include <libopencm3/gd32/f1x0/gpio.h>
-#elif defined(GD32E23X)
-#       include <libopencm3/gd32/e23x/gpio.h>
-#else
-#       error "gd32 family not defined."
-#endif
-
+#include <libopencm3/stm32/f0/gpio.h>
