@@ -44,6 +44,8 @@
 #       include <libopencm3/stm32/h7/memorymap.h>
 #elif defined(GD32F1X0)
 #       include <libopencm3/gd32/f1x0/memorymap.h>
+#elif defined(GD32E23X)
+#       include <libopencm3/gd32/e23x/memorymap.h>
 #else
 #	error "stm32 family not defined."
 #endif

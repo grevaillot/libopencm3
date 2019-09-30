@@ -258,6 +258,10 @@ gd32f170?4* gd32f1x0 ROM=16K RAM=4K
 gd32f170?6* gd32f1x0 ROM=32K RAM=4K
 gd32f170?8* gd32f1x0 ROM=64K RAM=8K
 
+gd32e23[01]?4* gd32e23x ROM=16K RAM=4K
+gd32e23[01]?6* gd32e23x ROM=32K RAM=6K
+gd32e23[01]?8* gd32e23x ROM=64K RAM=8K
+
 ################################################################################
 # the SAM3 chips
 
@@ -535,6 +539,7 @@ stm32t END ROM_OFF=0x08000000 RAM_OFF=0x20000000 CPU=cortex-m3 FPU=soft
 # the GD32 families
 
 gd32f1x0 END ROM_OFF=0x08000000 RAM_OFF=0x20000000 CPU=cortex-m3 FPU=soft
+gd32e23x END ROM_OFF=0x08000000 RAM_OFF=0x20000000 CPU=cortex-m23 FPU=soft
 
 ################################################################################
 # the SAM3 families
