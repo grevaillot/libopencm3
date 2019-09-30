@@ -26,7 +26,7 @@
 #define PPBI_BASE                       (0xE0000000U)
 
 /* Those defined only on ARMv7 and above */
-#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
+#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
 /* ITM: Instrumentation Trace Macrocell */
 #define ITM_BASE                        (PPBI_BASE + 0x0000)
 
@@ -44,14 +44,14 @@
 /* PPBI_BASE + 0xF000 (0xE000 F000 - 0xE003 FFFF): Reserved */
 
 /* Those defined only on ARMv7 and above */
-#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
+#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
 #define TPIU_BASE                       (PPBI_BASE + 0x40000)
 #endif
 
 /* --- SCS: System Control Space --- */
 
 /* Those defined only on ARMv7 and above */
-#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
+#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
 /* ITR: Interrupt Type Register */
 #define ITR_BASE                        (SCS_BASE + 0x0000)
 #endif
@@ -75,7 +75,7 @@
 #endif
 
 /* Those defined only on ARMv7 and above */
-#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
+#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__) || defined(__ARM_ARCH_8M_BASE__)
 /* STE: Software Trigger Interrupt Register */
 #define STIR_BASE                       (SCS_BASE + 0x0F00)
 /* ID: ID space */

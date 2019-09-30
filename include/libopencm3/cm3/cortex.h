@@ -91,7 +91,7 @@ static inline bool cm_is_masked_interrupts(void)
 	return result;
 }
 
-#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
+#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__)
 /*---------------------------------------------------------------------------*/
 /** @brief Cortex M Check if Fault interrupt is masked
  *
@@ -128,7 +128,7 @@ static inline uint32_t cm_mask_interrupts(uint32_t mask)
 	return old;
 }
 
-#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__)
+#if defined(__ARM_ARCH_7M__) || defined(__ARM_ARCH_7EM__) || defined(__ARM_ARCH_8M_MAIN__)
 /*---------------------------------------------------------------------------*/
 /** @brief Cortex M Mask HardFault interrupt
  *
