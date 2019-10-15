@@ -35,6 +35,7 @@ TGT_CFLAGS	+= $(STANDARD_FLAGS)
 ARFLAGS		= rcs
 
 OBJS += gpio_common_all.o gpio_common_f0234.o
+OBJS += rcc.o rcc_common_all.o
 
 VPATH += ../:../../cm3:../common:../../stm32/common
 

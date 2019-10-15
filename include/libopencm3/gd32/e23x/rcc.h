@@ -1,5 +1,14 @@
-/* This provides unification of code over GD32 subfamilies */
-
+/** @defgroup rcc_defines RCC Defines
+ *
+ * @brief <b>Defined Constants and Types for the GD32F1x0 Reset and Clock
+ * Control</b>
+ *
+ * @ingroup GD32E23X_defines
+ *
+ * @version 1.0.0
+ *
+ * LGPL License Terms @ref lgpl_license
+ *  */
 /*
  * This file is part of the libopencm3 project.
  *
@@ -16,15 +25,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
  */
+/**@{*/
 
-#include <libopencm3/cm3/common.h>
-#include <libopencm3/gd32/memorymap.h>
+#ifndef LIBOPENCM3_RCC_H
+#define LIBOPENCM3_RCC_H
 
-#if defined(GD32F1X0)
-#       include <libopencm3/gd32/f1x0/rcc.h>
-#elif defined(GD32E23X)
-#		include <libopencm3/gd32/e23x/rcc.h>
-#else
-#       error "gd32 family not defined."
+#include <libopencm3/gd32/common/rcc_common_v1.h>
+
 #endif
 
+/**@}*/
