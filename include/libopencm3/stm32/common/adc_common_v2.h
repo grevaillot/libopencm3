@@ -215,6 +215,20 @@ specific memorymap.h header before including this header file.*/
 
 /**@}*/
 
+/*****************************************************************************/
+/* API definitions                                                           */
+/*****************************************************************************/
+
+/** @defgroup adc_api_res ADC resolutions
+ * @ingroup adc_defines
+ *
+ *@{*/
+#define ADC_RESOLUTION_12BIT		ADC_CFGR1_RES_12_BIT
+#define ADC_RESOLUTION_10BIT		ADC_CFGR1_RES_10_BIT
+#define ADC_RESOLUTION_8BIT		ADC_CFGR1_RES_8_BIT
+#define ADC_RESOLUTION_6BIT		ADC_CFGR1_RES_6_BIT
+/**@}*/
+
 /* --- Function prototypes ------------------------------------------------- */
 
 BEGIN_DECLS
