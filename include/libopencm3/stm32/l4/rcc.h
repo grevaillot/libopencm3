@@ -39,6 +39,8 @@
 #ifndef LIBOPENCM3_RCC_H
 #define LIBOPENCM3_RCC_H
 
+#include <libopencm3/stm32/pwr.h>
+
 /* --- RCC registers ------------------------------------------------------- */
 
 #define RCC_CR				MMIO32(RCC_BASE + 0x00)
@@ -957,6 +959,41 @@ enum rcc_periph_rst {
 	RST_SYSCFG = _REG_BIT(RCC_APB2RSTR_OFFSET, 0),
 
 };
+
+struct rcc_clock_scale {
+	enum rcc_osc sysclock_source;
+
+	/* PLL as sysclock source cfg */
+	uint8_t pll_source;
+	uint8_t pll_div;
+	uint8_t pll_mul;
+	uint8_t pllp_div;
+	uint8_t pllq_div;
+	uint8_t pllr_div;
+
+	/* MSI as sysclock/pll source cfg */
+	uint8_t msi_range;
+
+	uint8_t hpre;
+	uint8_t ppre1;
+	uint8_t ppre2;
+	enum pwr_vos_scale voltage_scale;
+	uint8_t flash_waitstates;
+	uint32_t ahb_frequency;
+	uint32_t apb1_frequency;
+	uint32_t apb2_frequency;
+};
+
+
+enum rcc_clock {
+	RCC_CLOCK_CONFIG_HSI_16MHZ,
+	RCC_CLOCK_CONFIG_MSI_48MHZ,
+	RCC_CLOCK_CONFIG_HSI_PLL_80MHZ,
+	RCC_CLOCK_CONFIG_END
+};
+
+extern const struct rcc_clock_scale rcc_clock_config[RCC_CLOCK_CONFIG_END];
+
 #include <libopencm3/stm32/common/rcc_common_all.h>
 
 BEGIN_DECLS
@@ -986,6 +1023,7 @@ void rcc_set_clock48_source(uint32_t clksel);
 void rcc_enable_rtc_clock(void);
 void rcc_disable_rtc_clock(void);
 void rcc_set_rtc_clock_source(enum rcc_osc clk);
+void rcc_clock_setup(const struct rcc_clock_scale *clock);
 
 END_DECLS
 

@@ -37,11 +37,68 @@
 
 /**@{*/
 #include <libopencm3/stm32/rcc.h>
+#include <libopencm3/stm32/pwr.h>
+#include <libopencm3/stm32/flash.h>
+#include <libopencm3/cm3/assert.h>
 
 /* Set the default clock frequencies after reset. */
 uint32_t rcc_ahb_frequency = 4000000;
 uint32_t rcc_apb1_frequency = 4000000;
 uint32_t rcc_apb2_frequency = 4000000;
+
+const struct rcc_clock_scale rcc_clock_config[RCC_CLOCK_CONFIG_END] = {
+	[RCC_CLOCK_CONFIG_HSI_16MHZ] = {
+		/* 16mhz from hsi, scale1, 0s*/
+		.sysclock_source = RCC_HSI16,
+
+		.hpre = RCC_CFGR_HPRE_NODIV,
+		.ppre1 = RCC_CFGR_PPRE1_NODIV,
+		.ppre2 = RCC_CFGR_PPRE2_NODIV,
+
+		.voltage_scale = PWR_SCALE1,
+		.flash_waitstates = FLASH_ACR_LATENCY_0WS,
+		.ahb_frequency = 16e6,
+		.apb1_frequency = 16e6,
+		.apb2_frequency = 16e6,
+	},
+	[RCC_CLOCK_CONFIG_MSI_48MHZ] = {
+		/* 48mhz from msi, scale1, 2ws*/
+		.sysclock_source = RCC_MSI,
+
+		.hpre = RCC_CFGR_HPRE_NODIV,
+		.ppre1 = RCC_CFGR_PPRE1_NODIV,
+		.ppre2 = RCC_CFGR_PPRE2_NODIV,
+
+		.msi_range = RCC_CR_MSIRANGE_48MHZ,
+
+		.voltage_scale = PWR_SCALE1,
+		.flash_waitstates = FLASH_ACR_LATENCY_2WS,
+		.ahb_frequency = 48e6,
+		.apb1_frequency = 48e6,
+		.apb2_frequency = 48e6,
+	},
+	[RCC_CLOCK_CONFIG_HSI_PLL_80MHZ] = {
+		/* 80mhz from hsi via pll @ 160mhz / 2, scale1, 4ws */
+		.sysclock_source = RCC_PLL,
+		.pll_source = RCC_PLLCFGR_PLLSRC_HSI16,
+
+		.pll_div = 4,
+		.pll_mul = 40,
+		.pllp_div = RCC_PLLCFGR_PLLP_DIV7,
+		.pllq_div = RCC_PLLCFGR_PLLQ_DIV2,
+		.pllr_div = RCC_PLLCFGR_PLLR_DIV2,
+
+		.hpre = RCC_CFGR_HPRE_NODIV,
+		.ppre1 = RCC_CFGR_PPRE1_NODIV,
+		.ppre2 = RCC_CFGR_PPRE2_NODIV,
+
+		.voltage_scale = PWR_SCALE1,
+		.flash_waitstates = FLASH_ACR_LATENCY_4WS,
+		.ahb_frequency = 80e6,
+		.apb1_frequency = 80e6,
+		.apb2_frequency = 80e6,
+	},
+};
 
 void rcc_osc_ready_int_clear(enum rcc_osc osc)
 {
@@ -432,6 +489,91 @@ void rcc_set_rtc_clock_source(enum rcc_osc clk)
 		/* none selected */
 		break;
 	}
+}
+
+/**
+ * @brief Setup sysclock with desired source (HSE/HSI/PLL/MSI). taking care of flash/pwr and src configuration
+ * @param clock rcc_clock_scale with desired parameters
+ */
+void rcc_clock_setup(const struct rcc_clock_scale *clock)
+{
+	uint32_t sysclock_sw_source;
+	switch (clock->sysclock_source) {
+		case RCC_MSI:
+			sysclock_sw_source = RCC_CFGR_SW_MSI;
+			break;
+		case RCC_HSI16:
+			sysclock_sw_source = RCC_CFGR_SW_HSI16;
+			break;
+		case RCC_HSE:
+			sysclock_sw_source = RCC_CFGR_SW_HSE;
+			break;
+		case RCC_PLL:
+			{
+				sysclock_sw_source = RCC_CFGR_SW_PLL;
+
+				enum rcc_osc pll_source;
+				switch (clock->pll_source) {
+					case RCC_PLLCFGR_PLLSRC_HSE:
+						pll_source = RCC_HSE;
+						break;
+					case RCC_PLLCFGR_PLLSRC_HSI16:
+						pll_source = RCC_HSI16;
+						break;
+					case RCC_PLLCFGR_PLLSRC_MSI:
+						rcc_set_msi_range(clock->msi_range);
+						pll_source = RCC_MSI;
+						break;
+					default:
+						cm3_assert_not_reached();
+						return;
+				}
+
+				/* start pll src osc. */
+				rcc_osc_on(pll_source);
+				rcc_wait_for_osc_ready(pll_source);
+
+				/* stop pll to reconfigure it. */
+				rcc_osc_off(RCC_PLL);
+				while (rcc_is_osc_ready(RCC_PLL));
+
+				rcc_set_main_pll(clock->pll_source, clock->pll_div, clock->pll_mul, clock->pllp_div, clock->pllq_div, clock->pllr_div);
+			}
+			break;
+		default:
+			cm3_assert_not_reached();
+			return;
+	}
+
+	rcc_periph_clock_enable(RCC_PWR);
+	pwr_set_vos_scale(clock->voltage_scale);
+
+	flash_set_ws(clock->flash_waitstates);
+
+	if (clock->flash_waitstates > FLASH_ACR_LATENCY_0WS)
+		flash_prefetch_enable();
+	else
+		flash_prefetch_disable();
+
+	flash_dcache_enable();
+	flash_icache_enable();
+
+	rcc_set_hpre(clock->hpre);
+	rcc_set_ppre1(clock->ppre1);
+	rcc_set_ppre2(clock->ppre2);
+
+	rcc_osc_on(clock->sysclock_source);
+	rcc_wait_for_osc_ready(clock->sysclock_source);
+
+	if (clock->sysclock_source == RCC_MSI)
+		rcc_set_msi_range(clock->msi_range);
+
+	rcc_set_sysclk_source(sysclock_sw_source);
+	rcc_wait_for_sysclk_status(clock->sysclock_source);
+
+	rcc_ahb_frequency = clock->ahb_frequency;
+	rcc_apb1_frequency = clock->apb1_frequency;
+	rcc_apb2_frequency = clock->apb2_frequency;
 }
 
 /**@}*/
