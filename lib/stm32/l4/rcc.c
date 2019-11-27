@@ -491,6 +491,18 @@ void rcc_set_rtc_clock_source(enum rcc_osc clk)
 	}
 }
 
+/**f Configure mco prescaler.
+ * @param[in] mcopre prescaler value @ref rcc_cfgr_mcopre
+ */
+void rcc_set_mcopre(uint32_t mcopre)
+{
+	uint32_t reg32;
+
+	reg32 = RCC_CFGR;
+	reg32 &= ~(RCC_CFGR_MCOPRE_MASK << RCC_CFGR_MCOPRE_SHIFT);
+	RCC_CFGR = (reg32 | (mcopre << RCC_CFGR_MCOPRE_SHIFT));
+}
+
 /**
  * @brief Setup sysclock with desired source (HSE/HSI/PLL/MSI). taking care of flash/pwr and src configuration
  * @param clock rcc_clock_scale with desired parameters

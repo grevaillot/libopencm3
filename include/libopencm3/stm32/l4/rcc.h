@@ -1024,6 +1024,7 @@ void rcc_enable_rtc_clock(void);
 void rcc_disable_rtc_clock(void);
 void rcc_set_rtc_clock_source(enum rcc_osc clk);
 void rcc_clock_setup(const struct rcc_clock_scale *clock);
+void rcc_set_mcopre(uint32_t mcopre);
 
 END_DECLS
 
