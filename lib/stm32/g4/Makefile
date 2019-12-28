@@ -29,7 +29,7 @@ TGT_CFLAGS	= -Os \
 		  -Wundef -Wshadow \
 		  -I../../../include -fno-common \
 		  -mcpu=cortex-m4 -mthumb $(FP_FLAGS) \
-		  -ffunction-sections -fdata-sections -MD -DSTM32G4
+		  -ffunction-sections -fdata-sections -MD -DSTM32G4 -Werror
 TGT_CFLAGS	+= $(DEBUG_FLAGS)
 TGT_CFLAGS	+= $(STANDARD_FLAGS)
 
@@ -42,7 +42,7 @@ OBJS += lptimer_common_all.o
 OBJS += pwr.o
 OBJS += rcc.o rcc_common_all.o
 OBJS += rng_common_v1.o
-OBJS += usart_common_all.o usart_common_v2.o
+OBJS += usart_common_all.o usart_common_v2.o usart_common_fifos.o
 
 VPATH += ../../usb:../:../../cm3:../common
 VPATH += ../../ethernet
