@@ -34,6 +34,8 @@
 
 /* --- LPTIM (low power timer) ------------------------------------------- */
 
+/** @defgroup lptim_registers Low Power Timer Register
+@{*/
 #define LPTIM_ISR(tim_base)		MMIO32((tim_base) + 0x00)
 #define LPTIM_ICR(tim_base)		MMIO32((tim_base) + 0x04)
 #define LPTIM_IER(tim_base)		MMIO32((tim_base) + 0x08)
@@ -42,6 +44,7 @@
 #define LPTIM_CMP(tim_base)		MMIO32((tim_base) + 0x14)
 #define LPTIM_ARR(tim_base)		MMIO32((tim_base) + 0x18)
 #define LPTIM_CNT(tim_base)		MMIO32((tim_base) + 0x1C)
+/**@}*/
 
 #define LPTIM1_ISR			LPTIM_ISR(LPTIM1_BASE)
 #define LPTIM1_ICR			LPTIM_ICR(LPTIM1_BASE)
