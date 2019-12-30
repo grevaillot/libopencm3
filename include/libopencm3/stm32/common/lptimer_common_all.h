@@ -66,6 +66,17 @@
 #define LPTIM2_CNT			LPTIM_CNT(LPTIM2_BASE)
 #endif
 
+#if defined(LPTIM3_BASE)
+#define LPTIM3_ISR			LPTIM_ISR(LPTIM3_BASE)
+#define LPTIM3_ICR			LPTIM_ICR(LPTIM3_BASE)
+#define LPTIM3_IER			LPTIM_IER(LPTIM3_BASE)
+#define LPTIM3_CFGR			LPTIM_CFGR(LPTIM3_BASE)
+#define LPTIM3_CR			LPTIM_CR(LPTIM3_BASE)
+#define LPTIM3_CMP			LPTIM_CMP(LPTIM3_BASE)
+#define LPTIM3_ARR			LPTIM_ARR(LPTIM3_BASE)
+#define LPTIM3_CNT			LPTIM_CNT(LPTIM3_BASE)
+#endif
+
 /** @defgroup lptim_isr LPTIM_ISR Interrupt and Status Register
 @{*/
 
