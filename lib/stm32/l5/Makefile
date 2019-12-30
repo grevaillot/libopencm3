@@ -36,6 +36,7 @@ TGT_CFLAGS	+= $(STANDARD_FLAGS)
 ARFLAGS		= rcs
 
 OBJS += exti_common_all.o exti_common_v2.o
+OBJS += gpio_common_all.o gpio_common_f0234.o
 
 VPATH +=../:../../cm3:../common
 
