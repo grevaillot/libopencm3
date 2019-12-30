@@ -35,6 +35,8 @@ TGT_CFLAGS	+= $(STANDARD_FLAGS)
 
 ARFLAGS		= rcs
 
+OBJS += exti_common_all.o exti_common_v2.o
+
 VPATH +=../:../../cm3:../common
 
 include ../../Makefile.include
