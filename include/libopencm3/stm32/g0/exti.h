@@ -36,10 +36,6 @@ BEGIN_DECLS
 
 END_DECLS
 
-#else
-/** @cond */
-#warning "exti_common_v1.h should not be included directly, only via exti.h"
 #endif
-/** @endcond */
 
 /**@}*/
