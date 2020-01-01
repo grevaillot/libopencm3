@@ -29,13 +29,14 @@ TGT_CFLAGS	= -Os \
 		  -Wundef -Wshadow \
 		  -I../../../include -fno-common \
 		  -mcpu=cortex-m33 -mthumb $(FP_FLAGS) \
-		  -ffunction-sections -fdata-sections -MD -DSTM32L5
+		  -ffunction-sections -fdata-sections -MD -DSTM32L5 -Werror
 TGT_CFLAGS	+= $(DEBUG_FLAGS)
 TGT_CFLAGS	+= $(STANDARD_FLAGS)
 
 ARFLAGS		= rcs
 
 OBJS += exti_common_all.o exti_common_v2.o
+OBJS += desig.o
 OBJS += gpio_common_all.o gpio_common_f0234.o
 OBJS += lptimer_common_all.o
 
