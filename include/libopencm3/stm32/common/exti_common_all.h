@@ -69,6 +69,11 @@
 #define EXTI35				(1 << 3)
 #define EXTI36				(1 << 4)
 #define EXTI37				(1 << 5)
+#define EXTI38				(1 << 6)
+#define EXTI39				(1 << 7)
+#define EXTI40				(1 << 8)
+#define EXTI41				(1 << 9)
+#define EXTI42				(1 << 10)
 
 /* Trigger types */
 enum exti_trigger_type {
