@@ -680,95 +680,165 @@
 #define RCC_APB2SMENR_SYSCFGSMEN		(1 << 0)
 /**@}*/
 
-/** @defgroup rcc_ccipr_values RCC_CCIPR - Peripherals independent clock config register
- * @{
- */
-/* all fields are 2 bits */
-#define RCC_CCIPR_SEL_MASK	0x3
-
-#define RCC_CCIPR_ADC345_NONE		0
-#define RCC_CCIPR_ADC345_PLLP		1
-#define RCC_CCIPR_ADC345_SYS		2
-#define RCC_CCIPR_ADC345_SHIFT		30
-
-#define RCC_CCIPR_ADC12_NONE		0
-#define RCC_CCIPR_ADC12_PLLP		1
-#define RCC_CCIPR_ADC12_SYS		2
-#define RCC_CCIPR_ADC12_SHIFT		28
-
-#define RCC_CCIPR_CLK48_HSI48		0
-#define RCC_CCIPR_CLK48_PLLQ		2
-#define RCC_CCIPR_CLK48_SHIFT		26
-
-#define RCC_CCIPR_FDCAN_HSE		0
-#define RCC_CCIPR_FDCAN_PLLQ		1
-#define RCC_CCIPR_FDCAN_PCLK		2
-#define RCC_CCIPR_FDCAN_SHIFT		24
-
-#define RCC_CCIPR_I2S23_SYS		0
-#define RCC_CCIPR_I2S23_PLLQ		1
-#define RCC_CCIPR_I2S23_EXT		2
-#define RCC_CCIPR_I2S23_SHI16		3
-#define RCC_CCIPR_I2S23_SHIFT		22
-
-#define RCC_CCIPR_SAI1_SYS		0
-#define RCC_CCIPR_SAI1_PLLQ		1
-#define RCC_CCIPR_SAI1_EXT		2
-#define RCC_CCIPR_SAI1_HSI16		3
-#define RCC_CCIPR_SAI1_SHIFT		20
-
-#define RCC_CCIPR_LPTIM1_PCLK		0
-#define RCC_CCIPR_LPTIM1_LSI		1
-#define RCC_CCIPR_LPTIM1_HSI16		2
-#define RCC_CCIPR_LPTIM1_LSE		3
-#define RCC_CCIPR_LPTIM1SEL_SHIFT	18
-
-#define RCC_CCIPR_I2Cx_PCLK		0
-#define RCC_CCIPR_I2Cx_SYS		1
-#define RCC_CCIPR_I2Cx_HSI16		2
-#define RCC_CCIPR_I2C3_SHIFT		16
-#define RCC_CCIPR_I2C2_SHIFT		14
-#define RCC_CCIPR_I2C1_SHIFT		12
-
-#define RCC_CCIPR_LPUART1_PCLK		0
-#define RCC_CCIPR_LPUART1_SYS		1
-#define RCC_CCIPR_LPUART1_HSI16		2
-#define RCC_CCIPR_LPUART1_LSE		3
-#define RCC_CCIPR_LPUART1SEL_SHIFT	10
-
-#define RCC_CCIPR_USARTx_PCLK		0
-#define RCC_CCIPR_USARTx_SYS		1
-#define RCC_CCIPR_USARTx_HSI16		2
-#define RCC_CCIPR_USARTx_LSE		3
-#define RCC_CCIPR_UARTx_PCLK		RCC_CCIPR_USARTx_PCLK
-#define RCC_CCIPR_UARTx_SYS		RCC_CCIPR_USARTx_SYS
-#define RCC_CCIPR_UARTx_HSI16		RCC_CCIPR_USARTx_HSI16
-#define RCC_CCIPR_UARTx_LSE		RCC_CCIPR_USARTx_LSE
-#define RCC_CCIPR_UART5_SHIFT		8
-#define RCC_CCIPR_UART4_SHIFT		6
-#define RCC_CCIPR_USART3_SHIFT		4
-#define RCC_CCIPR_USART2_SHIFT		2
-#define RCC_CCIPR_USART1_SHIFT		0
+/** @defgroup rcc_ccipr1 CCIPR1 CCIPR
+@{*/
+#define RCC_CCIPR1_ADC345SEL_SHIFT		30
+#define RCC_CCIPR1_ADC345SEL_MASK		0x03
+/** @defgroup rcc_ccipr1_adc345sel ADC345SEL ADC3/4/5 clock source selection
+@{*/
+#define RCC_CCIPR1_ADC345SEL_NONE		0x0
+#define RCC_CCIPR1_ADC345SEL_PLLPCLK		0x1
+#define RCC_CCIPR1_ADC345SEL_PCLK		0x2
 /**@}*/
 
-/** defgroup rcc_ccipr2_values RCC_CCIPR2 -  Peripherals independent clock config register 2
- * @{
- */
-#define RCC_CCIPR2_QSPI_SYS		0
-#define RCC_CCIPR2_QSPI_HSI16		1
-#define RCC_CCIPR2_QSPI_PLLQ		2
-#define RCC_CCIPR2_QSPI_SHIFT		20
-
-#define RCC_CCIPR2_I2C4_PCLK		0
-#define RCC_CCIPR2_I2C4_SYS		1
-#define RCC_CCIPR2_I2C4_HSI16		2
-#define RCC_CCIPR2_I2C4_SHIFT		0
+#define RCC_CCIPR1_ADC12SEL_SHIFT		28
+#define RCC_CCIPR1_ADC12SEL_MASK		0x03
+/** @defgroup rcc_ccipr1_adcsel ADC12SEL ADC1/2s clock source selection
+@{*/
+#define RCC_CCIPR1_ADC12SEL_NONE		0x0
+#define RCC_CCIPR1_ADC12SEL_PLLPCLK		0x1
+#define RCC_CCIPR1_ADC12SEL_PCLK		0x2
 /**@}*/
 
-/** @defgroup rcc_bdcr_values RCC_BDCR - Backup domain control register
- * @{
- */
+#define RCC_CCIPR1_CLK48SEL_SHIFT		26
+#define RCC_CCIPR1_CLK48SEL_MASK		0x03
+/** @defgroup rcc_ccipr1_clk48sel CLK48SEL 48 MHz clock source selection
+@{*/
+#define RCC_CCIPR1_CLK48SEL_HSI48		0x0
+#define RCC_CCIPR1_CLK48SEL_PLLQCLK		0x2
+/**@}*/
 
+#define RCC_CCIPR1_FDCANSEL_SHIFT		24
+#define RCC_CCIPR1_FDCANSEL_MASK		0x03
+/** @defgroup rcc_ccipr1_fdcansel FDCANSEL Fdcan clock source selection
+@{*/
+#define RCC_CCIPR1_FDCANSEL_HSE		0x0
+#define RCC_CCIPR1_FDCANSEL_PLLQCLK		0x1
+#define RCC_CCIPR1_FDCANSEL_PCLK		0x2
+/**@}*/
+
+#define RCC_CCIPR1_I2S23SEL__SHIFT		22
+#define RCC_CCIPR1_I2S13SEL__MASK		0x03
+/** @defgroup rcc_ccipr1_i2s23sel I2S23SEL I2S23 clock source selection
+@{*/
+#define RCC_CCIPR1_I2S23SEL_PCLK		0x0
+#define RCC_CCIPR1_I2S23SEL_PLLQCLK		0x1
+#define RCC_CCIPR1_I2S23SEL_I2S_CKIN	0x2
+#define RCC_CCIPR1_I2S23SEL_HSI16		0x3
+/**@}*/
+
+#define RCC_CCIPR1_SAI1SEL_SHIFT		20
+#define RCC_CCIPR1_SAI1SEL_MASK		0x03
+/** @defgroup rcc_ccipr1_saisel SAISEL SAI1 clock source selection
+@{*/
+#define RCC_CCIPR1_SAI1SEL_SYSCLK		0x0
+#define RCC_CCIPR1_SAI1SEL_PLLQCLK		0x1
+#define RCC_CCIPR1_SAI1SEL_I2S_CKIN		0x2
+#define RCC_CCIPR1_SAI1SEL_HSI16		0x3
+/**@}*/
+
+#define RCC_CCIPR1_LPTIM1SEL_SHIFT		18
+#define RCC_CCIPR1_LPTIM1SEL_MASK		0x03
+/** @defgroup rcc_ccipr1_lptim1sel LPTIM1SEL Low power timer 1 clock source selection
+@{*/
+#define RCC_CCIPR1_LPTIM1SEL_PCLK		0x0
+#define RCC_CCIPR1_LPTIM1SEL_LSI		0x1
+#define RCC_CCIPR1_LPTIM1SEL_HSI16		0x2
+#define RCC_CCIPR1_LPTIM1SEL_LSE		0x3
+/**@}*/
+
+#define RCC_CCIPR1_I2C3SEL_SHIFT		16
+#define RCC_CCIPR1_I2C3SEL_MASK			0x03
+/** @defgroup rcc_ccipr1_i2c3sel I2C3SEL I2C3 clock source selection
+@{*/
+#define RCC_CCIPR1_I2C3SEL_PCLK			0x0
+#define RCC_CCIPR1_I2C3SEL_SYSCLK		0x1
+#define RCC_CCIPR1_I2C3SEL_HSI16		0x2
+/**@}*/
+
+#define RCC_CCIPR1_I2C2SEL_SHIFT		14
+#define RCC_CCIPR1_I2C2SEL_MASK		0x03
+/** @defgroup rcc_ccipr1_i2c2sel I2C2SEL I2C2 clock source selection
+@{*/
+#define RCC_CCIPR1_I2C2SEL_PCLK			0x0
+#define RCC_CCIPR1_I2C2SEL_SYSCLK		0x1
+#define RCC_CCIPR1_I2C2SEL_HSI16		0x2
+/**@}*/
+
+#define RCC_CCIPR1_I2C1SEL_SHIFT		12
+#define RCC_CCIPR1_I2C1SEL_MASK		0x03
+/** @defgroup rcc_ccipr1_i2c1sel I2C1SEL I2C1 clock source selection
+@{*/
+#define RCC_CCIPR1_I2C1SEL_PCLK			0x0
+#define RCC_CCIPR1_I2C1SEL_SYSCLK		0x1
+#define RCC_CCIPR1_I2C1SEL_HSI16		0x2
+/**@}*/
+
+#define RCC_CCIPR1_LPUART1SEL_SHIFT		10
+#define RCC_CCIPR1_LPUART1SEL_MASK		0x03
+/** @defgroup rcc_ccipr1_lpuart1sel LPUART1SEL LPUART1 clock source selection
+@{*/
+#define RCC_CCIPR1_LPUART1SEL_PCLK		0x0
+#define RCC_CCIPR1_LPUART1SEL_SYSCLK	0x1
+#define RCC_CCIPR1_LPUART1SEL_HSI16		0x2
+#define RCC_CCIPR1_LPUART1SEL_LSE		0x3
+/**@}*/
+
+#define RCC_CCIPR1_UART5SEL_SHIFT		8
+#define RCC_CCIPR1_UART5SEL_MASK		0x03
+/** @defgroup rcc_ccipr1_uart5sel UART5SEL UART5 clock source selection
+@{*/
+#define RCC_CCIPR1_UART5SEL_PCLK		0x0
+#define RCC_CCIPR1_UART5SEL_SYSCLK	0x1
+#define RCC_CCIPR1_UART5SEL_HSI16		0x2
+#define RCC_CCIPR1_UART5SEL_LSE		0x3
+/**@}*/
+
+#define RCC_CCIPR1_UART4SEL_SHIFT		6
+#define RCC_CCIPR1_UART4SEL_MASK		0x03
+/** @defgroup rcc_ccipr1_uart4sel UART4SEL UART4 clock source selection
+@{*/
+#define RCC_CCIPR1_UART4SEL_PCLK		0x0
+#define RCC_CCIPR1_UART4SEL_SYSCLK		0x1
+#define RCC_CCIPR1_UART4SEL_HSI16		0x2
+#define RCC_CCIPR1_UART4SEL_LSE			0x3
+/**@}*/
+
+#define RCC_CCIPR1_USART3SEL_SHIFT		4
+#define RCC_CCIPR1_USART3SEL_MASK		0x03
+/** @defgroup rcc_ccipr1_usart3sel USART3SEL USART3 clock source selection
+@{*/
+#define RCC_CCIPR1_USART3SEL_PCLK		0x0
+#define RCC_CCIPR1_USART3SEL_SYSCLK		0x1
+#define RCC_CCIPR1_USART3SEL_HSI16		0x2
+#define RCC_CCIPR1_USART3SEL_LSE		0x3
+/**@}*/
+
+#define RCC_CCIPR1_USART2SEL_SHIFT		2
+#define RCC_CCIPR1_USART2SEL_MASK		0x03
+/** @defgroup rcc_ccipr1_usart2sel USART2SEL USART2 clock source selection
+@{*/
+#define RCC_CCIPR1_USART2SEL_PCLK		0x0
+#define RCC_CCIPR1_USART2SEL_SYSCLK		0x1
+#define RCC_CCIPR1_USART2SEL_HSI16		0x2
+#define RCC_CCIPR1_USART2SEL_LSE		0x3
+/**@}*/
+
+#define RCC_CCIPR1_USART1SEL_SHIFT		0
+#define RCC_CCIPR1_USART1SEL_MASK		0x03
+/** @defgroup rcc_ccipr1_usart1sel USART1SEL USART1 clock source selection
+@{*/
+#define RCC_CCIPR1_USART1SEL_PCLK		0x0
+#define RCC_CCIPR1_USART1SEL_SYSCLK		0x1
+#define RCC_CCIPR1_USART1SEL_HSI16		0x2
+#define RCC_CCIPR1_USART1SEL_LSE		0x3
+/**@}*/
+/**@}*/
+
+/** @defgroup rcc_bdcr BDCR BDCR
+@{*/
+
+/** RCC_BDCR_LSCOSEL Low speed clock output selection **/
 #define RCC_BDCR_LSCOSEL		(1 << 25)
 #define RCC_BDCR_LSCOEN			(1 << 24)
 #define RCC_BDCR_BDRST			(1 << 16)
@@ -822,6 +892,26 @@
 
 #define RCC_CRRCR_HSI48RDY	BIT1
 #define RCC_CRRCR_HSI48ON	BIT0
+/**@}*/
+
+/** @defgroup rcc_ccipr2 CCIPR2 Peripherals independent clock configuration register
+@{*/
+#define RCC_CCIPR2_QUADSPISEL_SHIFT		20
+#define RCC_CCIPR2_QUADSPISEL_MASK		0x03
+/** @defgroup rcc_ccipr2_quadspisel QUADSPISEL Octospi clock source selection
+@{*/
+#define RCC_CCIPR2_QSPISEL_SYSCLK		0x0
+#define RCC_CCIPR2_QSPISEL_HSI16		0x1
+#define RCC_CCIPR2_QSPISEL_PLLQCLK		0x2
+/**@}*/
+
+#define RCC_CCIPR2_I2C4SEL_SHIFT		0
+#define RCC_CCIPR2_I2C4SEL_MASK		0x03
+/** @defgroup rcc_ccipr2_i2c4sel I2C4SEL I2C4 clock source selection
+@{*/
+#define RCC_CCIPR2_I2C4SEL_PCLK			0x0
+#define RCC_CCIPR2_I2C4SEL_SYSCLK		0x1
+#define RCC_CCIPR2_I2C4SEL_HSI16		0x2
 /**@}*/
 
 /* --- Variable definitions ------------------------------------------------ */
