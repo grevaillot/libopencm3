@@ -113,9 +113,11 @@
 /* AHB2 */
 #define ADC1_BASE			(PERIPH_BASE_AHB2 + 0x0000)
 #define ADC2_BASE			ADC1_BASE
+#define ADC12_BASE			ADC1_BASE /* Compatibility */
 #define ADC3_BASE			(PERIPH_BASE_AHB2 + 0x0400)
 #define ADC4_BASE			ADC3_BASE
 #define ADC5_BASE			ADC3_BASE
+#define ADC345_BASE			ADC3_BASE /* Compatibility */
 #define DAC1_BASE			(PERIPH_BASE_AHB2 + 0x0800)
 #define DAC2_BASE			(PERIPH_BASE_AHB2 + 0x0c00)
 #define DAC3_BASE			(PERIPH_BASE_AHB2 + 0x1000)
